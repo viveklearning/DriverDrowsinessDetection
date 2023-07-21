@@ -1,0 +1,31 @@
+The provided code is a Python script for real-time drowsiness detection using OpenCV, Dlib, and facial landmarks. It uses the computer's camera to capture video frames, detects faces in the frames, and then analyzes the facial landmarks to determine if the person's eyes are open or closed. Based on the eye blink patterns, it classifies the user's state as either "SLEEPING !!!", "Drowsy !", or "Active :)" and displays the status on the video feed.
+
+Here's a step-by-step explanation of the code:
+
+Import necessary libraries:
+
+cv2: For basic image processing functions using OpenCV.
+numpy as np: For array-related functions.
+dlib: For deep learning-based modules and face landmark detection.
+face_utils from imutils: For basic operations related to facial landmarks conversion.
+Initialize the camera and face detector:
+
+cap = cv2.VideoCapture(0): Creates a video capture object to access the default camera (index 0).
+detector = dlib.get_frontal_face_detector(): Initializes a frontal face detector from Dlib.
+predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat"): Loads a pre-trained facial landmarks predictor model from Dlib.
+Define utility functions:
+
+compute: Calculates the Euclidean distance between two points.
+blinked: Determines whether the eyes are blinked based on the distances between specific facial landmarks.
+Main loop for real-time drowsiness detection:
+
+The script continuously captures video frames from the camera.
+For each frame, it converts it to grayscale and detects faces using the detector.
+It iterates through each detected face, draws a rectangle around it, and extracts facial landmarks using the predictor.
+It calls the blinked function to determine if each eye is open, blinked, or closed based on the distances between specific facial landmarks.
+It updates the status based on the blinking patterns and changes the status color accordingly.
+The status and landmarks are drawn on the video feed using cv2.putText and cv2.circle functions, respectively.
+The processed frame and the face frame (with detected landmarks) are displayed using cv2.imshow.
+The script continues to display the real-time video feed and the detected face frames until the user presses the 'Esc' key (ASCII code 27).
+
+In summary, this script uses facial landmarks and blink detection to assess the user's drowsiness level in real-time through the camera feed and provides feedback based on the eye blinking patterns. It can be used as a simple tool to monitor a person's drowsiness while using the computer's camera.
